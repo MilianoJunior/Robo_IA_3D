@@ -15,8 +15,10 @@ class Data():
             result = chardet.detect(f.read())  # or readline if the file is large
     
         base = pd.read_csv('dados/M4.csv', encoding=result['encoding'])
+        base1 = pd.DataFrame(data=base[-self.num_days:-1].values,columns=base.columns)
+        base1 = base1.drop(['open', 'high', 'low', 'close','OBV','Acumulacao'], axis=1)
         entrada_rnn,entrada_trader = self.training_assess(base,self.num_days)
-        return entrada_rnn,entrada_trader
+        return entrada_rnn,entrada_trader,base1
         
     def duration(self,base):
         index = 0
@@ -32,7 +34,10 @@ class Data():
         colunas1 = ['Hora', 'open', 'high', 'low', 'close'] 
         entrada_RNN = pd.DataFrame(data=base[-num_days:-1].values,columns=base.columns)      
         entrada_trade = pd.DataFrame(data=base[-num_days:-1].values,columns=base.columns)
-        entrada_RNN = entrada_RNN.drop(['Data'], axis=1)
+        print('************************************')
+        print(entrada_RNN.values[-1])
+        print('************************************')
+        entrada_RNN = entrada_RNN.drop(['Data', 'open', 'high', 'low', 'close','OBV','Acumulacao'], axis=1)
         # entrada_RNN = entrada_RNN[colunas]
         entrada_trade = entrada_trade[colunas1]
         entrada_RNN = self.duration(entrada_RNN)

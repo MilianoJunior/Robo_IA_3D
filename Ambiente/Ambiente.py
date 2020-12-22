@@ -21,12 +21,12 @@ class ambiente():
     def trade(self,action):
         done = False
         stop = -300
-        gain = 300
+        gain = 500
         compra,venda,neg,ficha,comprado,vendido,recompensa = self.trader.agente(self.entrada_trader.values[self.cont],self.A[self.contador],stop,gain,0)
         self.contador += 1
         self.cont += 1
         self.A.append(action)
-        recompensa = self.sigmoid(recompensa)
+        # recompensa = self.sigmoid(recompensa)
         # print('------------------')
         # print('contador: ',self.cont)
         # print('acao: ',action)

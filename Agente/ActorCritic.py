@@ -10,6 +10,9 @@ class ActorCritic(tf.keras.Model):
       self, 
       num_actions: int, 
       num_hidden_units: int):
+      # funcao_ativacao,
+      # camadas,
+      # saidas):
     """Initialize."""
     super().__init__()
     model = keras.Sequential([
